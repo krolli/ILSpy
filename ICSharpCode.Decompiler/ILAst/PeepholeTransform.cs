@@ -389,12 +389,12 @@ namespace ICSharpCode.Decompiler.ILAst
 				case ILCode.Stobj:
 					expectedLdelemCode = ILCode.Ldobj;
 					break;
-				case ILCode.CallSetter:
-					expectedLdelemCode = ILCode.CallGetter;
-					break;
-				case ILCode.CallvirtSetter:
-					expectedLdelemCode = ILCode.CallvirtGetter;
-					break;
+                //case ILCode.CallSetter:
+                //    expectedLdelemCode = ILCode.CallGetter;
+                //    break;
+                //case ILCode.CallvirtSetter:
+                //    expectedLdelemCode = ILCode.CallvirtGetter;
+                //    break;
 				default:
 					return false;
 			}
