@@ -54,6 +54,7 @@ namespace ICSharpCode.Decompiler.ILAst
 		TransformMultidimensionalArrayInitializers,
 		TransformObjectInitializers,
 		MakeAssignmentExpression,
+		MakeCompoundAssignments,
 		IntroducePostIncrement,
 		InlineExpressionTreeParameterDeclarations,
 		InlineVariables2,
@@ -228,12 +229,16 @@ namespace ICSharpCode.Decompiler.ILAst
 					}
 					
 					if (abortBeforeStep == ILAstOptimizationStep.MakeAssignmentExpression) return;
-					if (StepsToDo[(int)ILAstOptimizationStep.MakeAssignmentExpression]) {
-						if (context.Settings.MakeAssignmentExpressions) {
-							modified |= block.RunOptimization(MakeAssignmentExpression);
-						}
+					if (StepsToDo[(int)ILAstOptimizationStep.MakeAssignmentExpression] &&
+						context.Settings.MakeAssignmentExpressions) {
+						modified |= block.RunOptimization(MakeAssignmentExpression);
+					}
+
+					if (abortBeforeStep == ILAstOptimizationStep.MakeCompoundAssignments) return;
+					if (StepsToDo[(int)ILAstOptimizationStep.MakeCompoundAssignments]) {
 						modified |= block.RunOptimization(MakeCompoundAssignments);
 					}
+
 					
 					if (abortBeforeStep == ILAstOptimizationStep.IntroducePostIncrement) return;
 					if (StepsToDo[(int)ILAstOptimizationStep.IntroducePostIncrement]) {
